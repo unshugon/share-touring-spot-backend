@@ -15,7 +15,6 @@ class PostSerializer(serializers.ModelSerializer):
             "title",
             "image",
             "content",
-            "location",
             "created_at",
             "created_by",
             "is_deleted",
