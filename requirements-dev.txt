@@ -9,5 +9,4 @@ dj-rest-auth===2.2.1
 django-allauth===0.47.0
 PyJWT===2.3.0
 dj-static===0.0.6
-GDAL===3.4.1
 black
