@@ -18,7 +18,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["*", "localhost"]
+ALLOWED_HOSTS = ["share-touring-spot-api.herokuapp.com", "localhost"]
 
 
 # Application definition
