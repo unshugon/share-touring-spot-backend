@@ -19,9 +19,10 @@ class PostDetailView(generics.RetrieveAPIView):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = (AllowAny,)
 
     def perform_create(self, serializer, **kwargs):
-        if self.request.user:
-            serializer.save(created_by=self.request.user)
-        else:
+        if self.request.user.is_anonymous:
             serializer.save(created_by=None)
+        else:
+            serializer.save(created_by=self.request.user)
