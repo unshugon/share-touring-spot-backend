@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
-    "django.contrib.gis",
     # 3rd party
     "rest_framework",
     "rest_framework.authtoken",
@@ -153,7 +152,7 @@ WSGI_APPLICATION = "share_touring_spot.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.contrib.gis.db.backends.mysql",
+        "ENGINE": "django.db.backends.mysql",
         "NAME": "share_touring_spot",
         "USER": "user",
         "PASSWORD": env("DB_PASSWORD"),
