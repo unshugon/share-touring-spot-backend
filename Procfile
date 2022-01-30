@@ -1,0 +1,1 @@
+web: gunicorn share_touring_spot.wsgi --log-file -
