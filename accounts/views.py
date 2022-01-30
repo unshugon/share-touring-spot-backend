@@ -5,4 +5,5 @@ from dj_rest_auth.registration.views import SocialLoginView
 
 class GoogleLoginView(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
+    callback_url = "http://localhost:3000"
     client_class = OAuth2Client
