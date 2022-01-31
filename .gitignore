@@ -55,6 +55,5 @@ DRFenv/
 
 # Developers
 *.sw*
-manage.py
 .DS_Store
 .vscode/
