@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+from socket import gethostbyname
 import os
 import environ
 
@@ -8,6 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, ".env"))
+
+hostname = gethostbyname()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -150,16 +153,22 @@ WSGI_APPLICATION = "share_touring_spot.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "share_touring_spot",
-        "USER": "root",
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+if "127.0.0.1" in hostname:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "share_touring_spot",
+            "USER": "root",
+            "PASSWORD": env("DB_PASSWORD"),
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
+        }
     }
-}
+else:
+    import dj_database_url
+
+    db_from_env = dj_database_url.config()
+    DATABASES = {"default": dj_database_url.config()}
 
 
 # Password validation
