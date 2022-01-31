@@ -1,6 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
-from socket import gethostbyname
+from socket import gethostname
 import os
 import environ
 
@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, ".env"))
 
-hostname = gethostbyname()
+hostname = gethostname()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -153,7 +153,7 @@ WSGI_APPLICATION = "share_touring_spot.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if "127.0.0.1" in hostname:
+if "Shun's MacBook Air" in hostname:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
