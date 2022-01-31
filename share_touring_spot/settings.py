@@ -152,12 +152,12 @@ WSGI_APPLICATION = "share_touring_spot.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "share_touring_spot",
-        "USER": "user",
+        "USER": "root",
         "PASSWORD": env("DB_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": "3306",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
