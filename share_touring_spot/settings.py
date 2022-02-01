@@ -167,7 +167,7 @@ WSGI_APPLICATION = "share_touring_spot.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEBUG:
+if env("LOCAL_HOST_NAME") in hostname:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
