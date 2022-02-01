@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "storages",
     # my app
     "accounts",
     "posts",
@@ -89,6 +90,18 @@ JWT_AUTH_REFRESH_COOKIE = "sts-refresh-token"
 REST_AUTH_SERIALIZERS = {
     "USER_DETAILS_SERIALIZER": "accounts.serializers.UserSerializer"
 }
+
+# AWS
+AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+AWS_STORAGE_BUCKET_NAME = os.environ["S3_BUCKET_NAME"]
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+S3_URL = "http://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = S3_URL
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -154,7 +167,7 @@ WSGI_APPLICATION = "share_touring_spot.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if env("LOCAL_HOST_NAME") in hostname:
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -168,9 +181,8 @@ if env("LOCAL_HOST_NAME") in hostname:
 else:
     import dj_database_url
 
-    db_from_env = dj_database_url.config()
+    db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
     DATABASES = {"default": dj_database_url.config()}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
