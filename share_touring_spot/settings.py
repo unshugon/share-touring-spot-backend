@@ -35,9 +35,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "django.contrib.gis",
     # 3rd party
     "rest_framework",
     "rest_framework.authtoken",
+    "rest_framework_gis",
     "corsheaders",
     "dj_rest_auth",
     "dj_rest_auth.registration",
@@ -158,7 +160,7 @@ WSGI_APPLICATION = "share_touring_spot.wsgi.application"
 if env("LOCAL_HOST_NAME") in hostname:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
+            "ENGINE": "django.contrib.gis.db.backends.postgis",
             "NAME": "share_touring_spot",
             "USER": "root",
             "PASSWORD": env("DB_PASSWORD"),
