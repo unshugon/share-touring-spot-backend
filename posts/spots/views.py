@@ -13,18 +13,20 @@ class PostView(generics.ListAPIView):
     permission_classes = (AllowAny,)
 
 
+class PostDetailView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (AllowAny,)
+
+
 class PostViewSet(generics.CreateAPIView):
     serializer_class = PostSerializer
     permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):
-        print("\n\npostメソッドの結果")
-        print(request.data)
         return self.create(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        print("\n\ncreateの結果")
-        print(type(request.POST["latitude"]))
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(
@@ -38,8 +40,6 @@ class PostViewSet(generics.CreateAPIView):
         )
 
     def perform_create(self, serializer, lat, lng, **kwargs):
-        print("\n\n投稿した")
-        print(self.request)
         location = Point((lat, lng))
         if self.request.user.is_anonymous:
             serializer.save(created_by=None, location=location)

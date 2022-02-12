@@ -23,5 +23,4 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_location(self, obj):
         if obj.location is not None:
-            print(obj.location.x)
             return {"lat": obj.location.x, "lng": obj.location.y}
